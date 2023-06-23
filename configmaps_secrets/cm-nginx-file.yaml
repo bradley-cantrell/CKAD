@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  nginx-custom-config.conf: |-
+    server {
+        listen  8888;
+        server_name localhost;
+        location / {
+            root /usr/share/nginx/html;
+            index index.html index.htm;
+        }
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: nginx-cm

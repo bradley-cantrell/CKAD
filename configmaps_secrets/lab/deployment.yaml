@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secretservice
+  labels:
+    app: secretservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: secretservice
+  template:
+    metadata:
+      labels:
+        app: secretservice
+    spec:
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: my-secrets
+      containers:
+        - name: secretservice
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+          - name: secret-volume
+            mountPath: /etc/users
+            readOnly: true

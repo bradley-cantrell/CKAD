@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secretservice
+spec:
+  securityContext:
+    runAsUser: 1000
+  containers:
+  - name: secretservice-container
+    image: nginx
+  volumes:
+  - name: secret-volume
+    secret:
+      secretName: my-secrets
